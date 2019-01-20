@@ -1,0 +1,8 @@
+从mac地址到http协议
+
+计算机在打包的时候，的全流程；
+
+一个http协议包基本组成
+mac地址+IP+PORT+传输协议（TCP/DUP） + socket + 应用层协议（http、https、ftp、ssh等）+ data
+socket：对 tcp/udp 协议的封装
+
