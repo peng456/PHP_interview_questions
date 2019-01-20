@@ -3,6 +3,30 @@
 计算机在打包的时候，的全流程；
 
 一个http协议包基本组成
-mac地址+IP+PORT+传输协议（TCP/DUP） + socket + 应用层协议（http、https、ftp、ssh等）+ data
-socket：对 tcp/udp 协议的封装
+mac地址+IP+PORT+传输协议（TCP/DUP） + 应用层协议（http、https、ftp、ssh等）+ data
 
+socket：对 tcp/udp 协议的封装,比如创建、销毁等。
+
+
+
+http   默认短链接
+       长链接 需要设置属性： keepLive
+mac地址+IP+PORT+传输协议（TCP/DUP） + http + data
+
+WebSocket  的理解
+WebSocket 是 HTML5 开始提供的一种在单个 TCP 连接上进行全双工通讯的协议。（参考https://www.cnblogs.com/jingmoxukong/p/7755643.html）
+mac地址+IP+PORT+传输协议（TCP/DUP） + WebSocket + data
+
+====》 所有 http、websocket 都是 基于 TCP协议实现的应用层协议，二者是并列关系。 websocket 是有状态、全双工协议。有效解决http协议短处。 
+
+
+
+0101010101                  +          mac地址     +   IP、ARP    +   PORT、传输协议（TCP/DUP） + http、ftp、smtp + data
+物理层传输实现                          数据链路层         网络层              传输层                     应用层
+（wifi无线短波频率、光缆光传播、R45）       lvs             nginx
+
+
+
+网络拓扑、映射关系 
+mac <---n:m--->  IP <---q:p---> 域名
+一般是 1：1 。但是实际上 为了提高利用率、并发，映射关系 可以 m:n。
