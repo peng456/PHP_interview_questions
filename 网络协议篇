@@ -20,10 +20,10 @@ mac地址+IP+PORT+传输协议（TCP/DUP） + WebSocket + data
 
 
 
-0101010101                  +          mac地址     +   IP、ARP    +   PORT、传输协议（TCP/DUP） + http、ftp、smtp + data
-物理层传输实现                          数据链路层         网络层              传输层                     应用层
-（wifi无线短波频率、光缆光传播、R45）       lvs             nginx
-
+0101010101                  +          mac地址       +   IP、ARP      +   PORT、传输协议（TCP/DUP） + http、ftp、smtp + data
+物理层传输实现                          数据链路层           网络层                 传输层                     应用层
+（wifi无线短波频率、光缆光传播、R45）       lvs               nginx
+                                lvs直接根据mac转发   nginx根据IP（域名）转发    三次握手、四次分手发生在这层    100~500状态协议在这层
 
 
 网络拓扑、映射关系 
