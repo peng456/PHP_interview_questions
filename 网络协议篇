@@ -8,7 +8,6 @@ mac地址+IP+PORT+传输协议（TCP/DUP） + 应用层协议（http、https、f
 socket：对 tcp/udp 协议的封装,比如创建、销毁等。
 
 
-
 http   默认短链接
        长链接 需要设置属性： keepLive
 mac地址+IP+PORT+传输协议（TCP/DUP） + http + data
@@ -30,3 +29,35 @@ mac地址+IP+PORT+传输协议（TCP/DUP） + WebSocket + data
 网络拓扑、映射关系 
 mac <---n:m--->  IP <---q:p---> 域名
 一般是 1：1 。但是实际上 为了提高利用率、并发，映射关系 可以 m:n。
+
+从局域网内一台主机中 PHP中curl 请求发出到 请求 到达 目的地 整个过程。
+
+$ch = curl_init();
+　　//设置选项，包括URL
+　　curl_setopt($ch, CURLOPT_URL, "//www.baidu.com");
+　　curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+　　curl_setopt($ch, CURLOPT_HEADER, 0);
+
+　　//执行并获取HTML文档内容
+　　$output = curl_exec($ch);
+
+　　//释放curl句柄
+　　curl_close($ch);
+  
+  
+
+计算机在打包的时候，的全流程；网络传输过程 打包、解包；寻址；映射。
+
+计算机打包  mac地址  +  data
+
+在局域网
+第一步 解析域名( 为了获取IP )===》 通过DNS解析服务器(或者本机器有定义 或缓存)请求获取 www.baidu.com  对应的 IP ===> 111.13.100.92 ===》
+需要  打包需要 mac 地址 ===》 通过ARP协议 获取 此IP 对应的 mac 地址（通过掩码 判断是否局域网内 （如果 是局域网内 则通过ARP协议寻找，找不到则ping不通）如果非局域网，则mac 地址为 网关地址（一般是路由器mac地址）） =====
+====》打包 mac + IP  + data  ===> 路由器 收到 数据包 解析 ===》 mac 在 自己 maclist 里面 则 直接 直接发送到  mac 对应 串口 硬件上；如果不在，则发送到默认的串口（也有mac 地址）（应该也会判断是否局域网，如果是局域网，而且没有找到对应的串口，
+应该丢弃此包；如果非局域网，应该会发送到公网上吧） ===》 数据包 在 公网上 流动 ===》到达 目的IP对应的 机器。
+
+
+
+
+
+
